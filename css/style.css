@@ -1,44 +1,53 @@
 /* ========================================
-   CSS 变量定义 - 春节红金配色
+   CSS 变量定义 - 新中式奢华配色
    ======================================== */
 :root {
-  /* 主色调 */
+  /* 主色调 - 深邃的中国红 */
   --color-primary: #c41e3a;
-  --color-primary-dark: #9e1831;
+  --color-primary-dark: #8b1428;
   --color-primary-light: #e85a5a;
+  --color-primary-glow: rgba(196, 30, 58, 0.4);
 
-  /* 金色点缀 */
+  /* 金色点缀 - 金箔质感 */
   --color-gold: #d4a853;
+  --color-gold-dark: #b8862f;
   --color-gold-light: #f0d78c;
+  --color-gold-bright: #ffd700;
+  --color-gold-glow: rgba(212, 168, 83, 0.3);
 
-  /* 背景色 */
-  --color-bg: #fef8f5;
-  --color-bg-dark: #2a1a1a;
+  /* 背景色 - 温暖纸质感 */
+  --color-bg: #fff8f0;
+  --color-bg-dark: #1a1210;
+  --color-bg-pattern: rgba(212, 168, 83, 0.03);
   --color-card: #ffffff;
+  --color-card-glass: rgba(255, 255, 255, 0.85);
 
   /* 文字色 */
   --color-text: #2a1a1a;
-  --color-text-light: #666666;
-  --color-text-muted: #999999;
+  --color-text-light: #5a4a4a;
+  --color-text-muted: #8a7a7a;
 
   /* 边框和阴影 */
-  --color-border: rgba(196, 30, 58, 0.1);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);
+  --color-border: rgba(212, 168, 83, 0.15);
+  --color-border-gold: rgba(212, 168, 83, 0.3);
+  --shadow-sm: 0 2px 8px rgba(196, 30, 58, 0.08);
+  --shadow-md: 0 8px 24px rgba(196, 30, 58, 0.12);
+  --shadow-lg: 0 16px 48px rgba(196, 30, 58, 0.18);
+  --shadow-gold: 0 4px 20px var(--color-gold-glow);
+  --shadow-inset: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 
   /* 圆角 */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
 
   /* 过渡 */
-  --transition-fast: 0.2s ease;
-  --transition-normal: 0.3s ease;
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 
   /* 字体 */
-  --font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  --font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 /* ========================================
@@ -65,6 +74,58 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 纸质纹理背景 */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      var(--color-bg-pattern) 2px,
+      var(--color-bg-pattern) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      var(--color-bg-pattern) 2px,
+      var(--color-bg-pattern) 4px
+    );
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* 装饰性中式图案 - 左上角 */
+body::after {
+  content: "";
+  position: fixed;
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--color-gold-glow) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-30px, 30px) rotate(90deg); }
+  50% { transform: translate(0, 50px) rotate(180deg); }
+  75% { transform: translate(30px, 30px) rotate(270deg); }
 }
 
 img {
@@ -85,62 +146,101 @@ button {
    ======================================== */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
 }
 
 /* ========================================
-   头部
+   头部 - 金箔渐变效果
    ======================================== */
 .header {
-  background: linear-gradient(
-    135deg,
-    var(--color-primary) 0%,
-    var(--color-primary-dark) 100%
-  );
+  background:
+    linear-gradient(135deg,
+      var(--color-primary) 0%,
+      var(--color-primary-dark) 50%,
+      var(--color-primary) 100%
+    );
   color: white;
-  padding: 32px 0;
+  padding: 48px 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 24px rgba(196, 30, 58, 0.3);
 }
 
+/* 动态光泽效果 */
 .header::before {
   content: "";
   position: absolute;
   top: -50%;
-  left: -50%;
+  left: -100%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.1) 0%,
-    transparent 60%
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255, 215, 0, 0.15) 45%,
+    rgba(255, 215, 0, 0.25) 50%,
+    rgba(255, 215, 0, 0.15) 55%,
+    transparent 60%,
+    transparent 100%
   );
-  animation: shimmer 15s linear infinite;
+  animation: shimmer 8s linear infinite;
+  pointer-events: none;
+}
+
+/* 金色装饰线 */
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-gold-bright) 20%,
+    var(--color-gold) 50%,
+    var(--color-gold-bright) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 20px var(--color-gold-glow);
 }
 
 @keyframes shimmer {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
 }
 
 .logo {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 8px;
+  font-size: 2.25rem;
+  font-weight: 900;
+  margin-bottom: 12px;
   position: relative;
+  letter-spacing: 0.5px;
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.3),
+    0 0 30px var(--color-gold-glow);
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), 0 0 30px var(--color-gold-glow); }
+  50% { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), 0 0 50px var(--color-gold-bright); }
 }
 
 .tagline {
-  font-size: 0.9rem;
-  opacity: 0.9;
+  font-size: 1rem;
+  opacity: 0.95;
   position: relative;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* ========================================
@@ -148,7 +248,9 @@ button {
    ======================================== */
 .main {
   flex: 1;
-  padding: 24px 0 48px;
+  padding: 48px 0 64px;
+  position: relative;
+  z-index: 1;
 }
 
 /* ========================================
@@ -157,55 +259,103 @@ button {
 .wallpaper-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 16px;
 }
 
 @media (min-width: 640px) {
   .wallpaper-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 20px;
   }
 }
 
 @media (min-width: 1024px) {
   .wallpaper-grid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 24px;
   }
 }
 
 /* ========================================
-   壁纸卡片
+   壁纸卡片 - 玻璃态 + 3D 效果
    ======================================== */
 .wallpaper-card {
-  background: var(--color-card);
+  background: var(--color-card-glass);
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  box-shadow:
+    var(--shadow-sm),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
   cursor: pointer;
-  transition: transform var(--transition-normal),
-    box-shadow var(--transition-normal);
+  transition: all var(--transition-normal);
   position: relative;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border-gold);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.wallpaper-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(212, 168, 83, 0.1) 45%,
+    rgba(255, 215, 0, 0.2) 50%,
+    rgba(212, 168, 83, 0.1) 55%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+  pointer-events: none;
 }
 
 .wallpaper-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    var(--shadow-lg),
+    var(--shadow-gold),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-color: var(--color-gold);
 }
 
+.wallpaper-card:hover::before {
+  opacity: 1;
+  animation: shine 1.5s ease-in-out;
+}
+
+@keyframes shine {
+  0% { transform: translate(-100%, -100%) rotate(0deg); }
+  100% { transform: translate(100%, 100%) rotate(45deg); }
+}
+
+/* 悬停提示 */
 .wallpaper-card::after {
-  content: "点击预览";
+  content: "✨ 点击预览";
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  background: linear-gradient(
+    to top,
+    rgba(196, 30, 58, 0.95) 0%,
+    rgba(196, 30, 58, 0.85) 50%,
+    transparent 100%
+  );
   color: white;
-  padding: 24px 12px 12px;
-  font-size: 0.8rem;
+  padding: 32px 16px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
   text-align: center;
   opacity: 0;
   transition: opacity var(--transition-fast);
+  backdrop-filter: blur(8px);
+  letter-spacing: 1px;
 }
 
 .wallpaper-card:hover::after {
@@ -216,18 +366,26 @@ button {
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  background: linear-gradient(45deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 200%;
-  animation: loading-bg 1.5s ease infinite;
+  background: linear-gradient(
+    135deg,
+    #f5f5f5 0%,
+    #e8e8e8 25%,
+    #f5f5f5 50%,
+    #e8e8e8 75%,
+    #f5f5f5 100%
+  );
+  background-size: 400% 400%;
+  animation: loading-gradient 2s ease infinite;
+  transition: transform var(--transition-slow);
 }
 
-@keyframes loading-bg {
-  0% {
-    background-position: 200% 200%;
-  }
-  100% {
-    background-position: 0% 0%;
-  }
+@keyframes loading-gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.wallpaper-card:hover .wallpaper-image {
+  transform: scale(1.05);
 }
 
 .wallpaper-image.loaded {
@@ -235,11 +393,11 @@ button {
 }
 
 /* ========================================
-   加载状态
+   加载状态 - 中式旋转效果
    ======================================== */
 .loading {
   text-align: center;
-  padding: 48px 0;
+  padding: 64px 0;
   color: var(--color-text-muted);
 }
 
@@ -248,23 +406,43 @@ button {
 }
 
 .loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--color-border);
+  width: 56px;
+  height: 56px;
+  border: 4px solid transparent;
   border-top-color: var(--color-primary);
+  border-right-color: var(--color-gold);
+  border-bottom-color: var(--color-primary);
+  border-left-color: var(--color-gold);
   border-radius: 50%;
-  margin: 0 auto 16px;
-  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+  animation: spin-elegant 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+  box-shadow:
+    0 0 20px var(--color-primary-glow),
+    inset 0 0 10px rgba(212, 168, 83, 0.2);
+  position: relative;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+.loading-spinner::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--color-gold-bright);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px var(--color-gold-glow);
+}
+
+@keyframes spin-elegant {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
 }
 
 /* ========================================
-   弹窗通用样式
+   弹窗通用样式 - 高级模糊效果
    ======================================== */
 .modal {
   position: fixed;
@@ -278,8 +456,7 @@ button {
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-normal),
-    visibility var(--transition-normal);
+  transition: all var(--transition-normal);
 }
 
 .modal.active {
@@ -293,8 +470,20 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
+  background: rgba(26, 18, 16, 0.75);
+  backdrop-filter: blur(12px) saturate(150%);
+  animation: overlay-in 0.4s ease;
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px) saturate(100%);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(12px) saturate(150%);
+  }
 }
 
 .modal-content {
@@ -304,172 +493,360 @@ button {
   max-width: 90vw;
   max-height: 90vh;
   overflow: auto;
-  animation: modal-in 0.3s ease;
+  animation: modal-scale-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(212, 168, 83, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-@keyframes modal-in {
-  from {
+@keyframes modal-scale-in {
+  0% {
     opacity: 0;
-    transform: scale(0.95) translateY(10px);
+    transform: scale(0.8) translateY(30px) rotateX(10deg);
   }
-  to {
+  100% {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0) rotateX(0deg);
   }
 }
 
 .modal-close {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 36px;
-  height: 36px;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
-  transition: background var(--transition-fast);
+  transition: all var(--transition-fast);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .modal-close:hover {
-  background: rgba(0, 0, 0, 0.7);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border-color: var(--color-gold);
+  transform: rotate(90deg) scale(1.1);
+  box-shadow:
+    0 6px 20px rgba(196, 30, 58, 0.4),
+    0 0 30px var(--color-gold-glow);
 }
 
 /* ========================================
-   预览弹窗
+   预览弹窗 - 精致展示
    ======================================== */
 .preview-content {
   padding: 0;
   background: transparent;
   text-align: center;
+  box-shadow: none;
 }
 
 .preview-image {
   max-width: 85vw;
   max-height: 70vh;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(212, 168, 83, 0.5),
+    0 0 60px rgba(212, 168, 83, 0.2);
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  animation: image-reveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes image-reveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) rotateY(-15deg);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+    filter: blur(0px);
+  }
 }
 
 .preview-info {
-  background: var(--color-card);
-  padding: 20px;
-  border-radius: var(--radius-md);
-  margin-top: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 248, 240, 0.98) 100%
+  );
+  padding: 28px 32px;
+  border-radius: var(--radius-lg);
+  margin-top: 20px;
+  box-shadow:
+    var(--shadow-lg),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  border: 1px solid var(--color-border-gold);
+  backdrop-filter: blur(20px);
+  animation: info-slide-up 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+@keyframes info-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .preview-info h3 {
-  font-size: 1.1rem;
-  margin-bottom: 4px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--color-text);
+  letter-spacing: 0.5px;
 }
 
 .preview-info p {
   color: var(--color-text-muted);
-  font-size: 0.85rem;
-  margin-bottom: 16px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  font-weight: 500;
 }
 
 /* ========================================
-   密码弹窗
+   密码弹窗 - 奢华设计
    ======================================== */
 .password-content {
-  width: 340px;
+  width: 420px;
   max-width: 90vw;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 248, 240, 1) 100%
+  );
+  border: 2px solid var(--color-border-gold);
+  position: relative;
+  overflow: hidden;
+}
+
+.password-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary) 0%,
+    var(--color-gold) 50%,
+    var(--color-primary) 100%
+  );
+  background-size: 200% 100%;
+  animation: gradient-flow 3s linear infinite;
+}
+
+@keyframes gradient-flow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
 }
 
 .password-box {
-  padding: 32px 24px;
+  padding: 40px 32px;
   text-align: center;
+  position: relative;
 }
 
 .password-box h3 {
-  font-size: 1.25rem;
-  margin-bottom: 8px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: var(--color-text);
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .password-hint {
-  color: var(--color-text-muted);
-  font-size: 0.85rem;
-  margin-bottom: 20px;
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  margin-bottom: 28px;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
 .password-input {
   width: 100%;
-  padding: 14px 16px;
-  border: 2px solid var(--color-border);
+  padding: 16px 20px;
+  border: 2px solid var(--color-border-gold);
   border-radius: var(--radius-sm);
-  font-size: 1rem;
+  font-size: 1.1rem;
   text-align: center;
-  transition: border-color var(--transition-fast);
+  transition: all var(--transition-fast);
+  background: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  letter-spacing: 2px;
+  box-shadow: var(--shadow-inset);
 }
 
 .password-input:focus {
   outline: none;
   border-color: var(--color-primary);
+  background: white;
+  box-shadow:
+    0 0 0 4px rgba(196, 30, 58, 0.1),
+    var(--shadow-inset);
+  transform: scale(1.02);
+}
+
+.password-input::placeholder {
+  letter-spacing: normal;
+  font-weight: 400;
 }
 
 .password-error {
   color: var(--color-primary);
-  font-size: 0.85rem;
-  margin-top: 8px;
-  min-height: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 12px;
+  min-height: 24px;
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
 }
 
 /* ========================================
-   按钮
+   按钮 - 金箔渐变效果
    ======================================== */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 12px 24px;
+  gap: 10px;
+  padding: 16px 32px;
   border-radius: var(--radius-sm);
-  font-size: 1rem;
-  font-weight: 500;
-  transition: all var(--transition-fast);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  border: none;
 }
 
 .btn-primary {
   background: linear-gradient(
     135deg,
     var(--color-primary) 0%,
-    var(--color-primary-dark) 100%
+    var(--color-primary-dark) 50%,
+    var(--color-primary) 100%
   );
+  background-size: 200% 100%;
   color: white;
+  box-shadow:
+    var(--shadow-md),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.4), transparent);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 32px rgba(196, 30, 58, 0.4),
+    0 0 40px var(--color-gold-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background-position: 100% 0;
+  border-color: var(--color-gold-bright);
+}
+
+.btn-primary:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .btn-primary:active {
-  transform: translateY(0);
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 16px rgba(196, 30, 58, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .btn-full {
   width: 100%;
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
 .btn-icon {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
+  animation: bounce-icon 2s ease-in-out infinite;
+}
+
+@keyframes bounce-icon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 }
 
 /* ========================================
-   底部
+   底部 - 优雅收尾
    ======================================== */
 .footer {
-  background: var(--color-bg-dark);
-  color: rgba(255, 255, 255, 0.6);
-  padding: 24px 0;
+  background: linear-gradient(
+    to bottom,
+    var(--color-bg-dark) 0%,
+    #0f0a08 100%
+  );
+  color: rgba(255, 255, 255, 0.7);
+  padding: 32px 0;
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(212, 168, 83, 0.2);
+  box-shadow: inset 0 1px 0 rgba(212, 168, 83, 0.1);
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-gold) 50%,
+    transparent 100%
+  );
+  opacity: 0.6;
+}
+
+.footer p {
+  position: relative;
+  z-index: 1;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 /* ========================================
@@ -477,4 +854,79 @@ button {
    ======================================== */
 .hidden {
   display: none !important;
+}
+
+/* ========================================
+   响应式优化
+   ======================================== */
+@media (max-width: 640px) {
+  .logo {
+    font-size: 1.75rem;
+  }
+
+  .header {
+    padding: 36px 0;
+  }
+
+  .main {
+    padding: 32px 0 48px;
+  }
+
+  .preview-image {
+    max-width: 92vw;
+    max-height: 65vh;
+  }
+
+  .preview-info {
+    padding: 20px 24px;
+  }
+
+  .password-box {
+    padding: 32px 24px;
+  }
+}
+
+/* ========================================
+   滚动条美化
+   ======================================== */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+  border-left: 1px solid var(--color-border);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary) 0%,
+    var(--color-gold) 100%
+  );
+  border-radius: 6px;
+  border: 2px solid var(--color-bg);
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary-dark) 0%,
+    var(--color-gold-dark) 100%
+  );
+  box-shadow: 0 0 10px var(--color-gold-glow);
+}
+
+/* ========================================
+   性能优化 - 硬件加速
+   ======================================== */
+.wallpaper-card,
+.modal-content,
+.preview-image,
+.btn-primary {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
