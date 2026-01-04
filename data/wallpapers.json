@@ -1,0 +1,22 @@
+{
+  "password": "spring2026",
+  "siteName": "春节壁纸精选",
+  "wallpapers": [
+    {
+      "id": "1",
+      "name": "示例壁纸1",
+      "preview": "images/preview/1.jpg",
+      "original": "images/original/1.jpg",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "2",
+      "name": "示例壁纸2",
+      "preview": "images/preview/2.jpg",
+      "original": "images/original/2.jpg",
+      "width": 1080,
+      "height": 1920
+    }
+  ]
+}

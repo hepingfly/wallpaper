@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>春节壁纸精选 | 高清无水印下载</title>
+    <meta name="description" content="精选高质量春节壁纸，一次付费终身下载" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- 头部 -->
+    <header class="header">
+      <div class="container">
+        <h1 class="logo">🧧 春节壁纸精选</h1>
+        <p class="tagline">精选高质量壁纸 · 一次付费终身下载</p>
+      </div>
+    </header>
+
+    <!-- 主内容 -->
+    <main class="main">
+      <div class="container">
+        <!-- 壁纸网格 -->
+        <div class="wallpaper-grid" id="wallpaperGrid">
+          <!-- 壁纸卡片由JS动态渲染 -->
+        </div>
+
+        <!-- 加载状态 -->
+        <div class="loading" id="loading">
+          <div class="loading-spinner"></div>
+          <p>加载中...</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- 预览弹窗 -->
+    <div class="modal" id="previewModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content preview-content">
+        <button class="modal-close" id="closePreview">×</button>
+        <img class="preview-image" id="previewImage" src="" alt="" />
+        <div class="preview-info">
+          <h3 id="previewName"></h3>
+          <p id="previewSize"></p>
+          <button class="btn btn-primary" id="downloadBtn">
+            <span class="btn-icon">⬇</span> 下载高清原图
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 密码验证弹窗 -->
+    <div class="modal" id="passwordModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content password-content">
+        <button class="modal-close" id="closePassword">×</button>
+        <div class="password-box">
+          <h3>🔐 输入下载密码</h3>
+          <p class="password-hint">购买后请在小红书私信中获取密码</p>
+          <input
+            type="password"
+            class="password-input"
+            id="passwordInput"
+            placeholder="请输入密码"
+          />
+          <p class="password-error" id="passwordError"></p>
+          <button class="btn btn-primary btn-full" id="verifyBtn">
+            验证并下载
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 春节壁纸精选 · 小红书购买后私信获取密码</p>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
