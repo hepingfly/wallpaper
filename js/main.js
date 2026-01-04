@@ -161,7 +161,8 @@ function downloadCurrentWallpaper() {
   
   const link = document.createElement('a');
   link.href = state.currentWallpaper.original;
-  link.download = `${state.currentWallpaper.name}.jpg`;
+  const ext = state.currentWallpaper.original.split('.').pop();
+  link.download = `${state.currentWallpaper.name}.${ext}`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
