@@ -204,6 +204,13 @@ function bindEvents() {
 function init() {
   bindEvents();
   loadWallpapers();
+  
+  // 禁止拖拽图片
+  document.addEventListener('dragstart', (e) => {
+    if (e.target.tagName === 'IMG') {
+      e.preventDefault();
+    }
+  });
 }
 
 // 启动
