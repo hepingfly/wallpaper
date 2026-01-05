@@ -156,41 +156,13 @@ function handleDownload() {
   }
 }
 
-async function downloadCurrentWallpaper() {
+function downloadCurrentWallpaper() {
   if (!state.currentWallpaper) return;
   
   const url = state.currentWallpaper.original;
-  const ext = url.split('.').pop();
-  const filename = `${state.currentWallpaper.name}.${ext}`;
   
-  // 显示下载中提示
-  elements.downloadBtn.disabled = true;
-  elements.downloadBtn.innerHTML = '<span class="btn-icon">⏳</span> 下载中...';
-  
-  try {
-    // 通过 fetch 获取图片数据，绕过跨域限制
-    const response = await fetch(url);
-    const blob = await response.blob();
-    
-    // 创建 Blob URL 并触发下载
-    const blobUrl = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = blobUrl;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    // 释放 Blob URL
-    URL.revokeObjectURL(blobUrl);
-  } catch (error) {
-    console.error('下载失败:', error);
-    alert('下载失败，请重试');
-  } finally {
-    // 恢复按钮状态
-    elements.downloadBtn.disabled = false;
-    elements.downloadBtn.innerHTML = '<span class="btn-icon">⬇</span> 下载高清原图';
-  }
+  // 直接在新标签页打开图片，用户可以右键/长按保存
+  window.open(url, '_blank');
 }
 
 // ========================================
