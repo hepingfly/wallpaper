@@ -1,34 +1,38 @@
 /**
  * 壁纸配置生成脚本
  * 
- * 使用方法：每次在 images/original 目录新增图片后，运行：
- *   node generate-config.js
- * 
- * 脚本会自动扫描目录并更新 wallpapers.json 配置文件
+ * 使用方法：
+ *   1. 将图片上传到 R2
+ *   2. 在 images.txt 中添加图片文件名（每行一个）
+ *   3. 运行：node generate-config.js
  */
 
 const fs = require('fs');
-const path = require('path');
 
-const IMAGE_DIR = 'images/original';
+const CDN_BASE = 'https://wallpaper-cdn.hepingfly.com';
+const IMAGES_FILE = 'images.txt';
 const OUTPUT_FILE = 'data/wallpapers.json';
 
-// 扫描图片目录
-const files = fs.readdirSync(IMAGE_DIR)
-  .filter(f => /\.(png|jpg|jpeg|webp)$/i.test(f))
-  .sort((a, b) => {
-    // 按数字排序
-    const numA = parseInt(a.replace(/[^0-9]/g, '')) || 0;
-    const numB = parseInt(b.replace(/[^0-9]/g, '')) || 0;
-    return numA - numB;
-  });
+// 读取图片列表
+if (!fs.existsSync(IMAGES_FILE)) {
+  console.log(`❌ 未找到 ${IMAGES_FILE} 文件`);
+  console.log('请创建该文件，每行一个图片文件名，例如：');
+  console.log('  2.png');
+  console.log('  3.png');
+  process.exit(1);
+}
+
+const files = fs.readFileSync(IMAGES_FILE, 'utf-8')
+  .split('\n')
+  .map(line => line.trim())
+  .filter(line => line && !line.startsWith('#')); // 过滤空行和注释
 
 // 生成壁纸配置
 const wallpapers = files.map((file, index) => ({
   id: String(index + 1),
   name: `春节壁纸 ${String(index + 1).padStart(3, '0')}`,
-  preview: `${IMAGE_DIR}/${file}`,
-  original: `${IMAGE_DIR}/${file}`,
+  preview: `${CDN_BASE}/${file}`,
+  original: `${CDN_BASE}/${file}`,
   width: 1080,
   height: 1920
 }));

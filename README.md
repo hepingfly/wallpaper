@@ -25,19 +25,20 @@ python3 -m http.server 8000
 
 ### 添加壁纸
 
-1. 将预览图放入 `images/preview/` 目录
-2. 将原图放入 `images/original/` 目录
-3. 编辑 `data/wallpapers.json` 添加壁纸信息：
+1. 将图片上传到 Cloudflare R2 存储桶
+2. 在 `images.txt` 末尾添加新图片的文件名
+3. 运行脚本生成配置：
 
-```json
-{
-  "id": "3",
-  "name": "壁纸名称",
-  "preview": "images/preview/3.jpg",
-  "original": "images/original/3.jpg",
-  "width": 1920,
-  "height": 1080
-}
+```bash
+node generate-config.js
+```
+
+4. 提交并推送到 GitHub：
+
+```bash
+git add .
+git commit -m "新增壁纸"
+git push origin main
 ```
 
 ### 修改密码
