@@ -31,7 +31,9 @@ const files = fs.readFileSync(IMAGES_FILE, 'utf-8')
 const wallpapers = files.map((file, index) => ({
   id: String(index + 1),
   name: `春节壁纸 ${String(index + 1).padStart(3, '0')}`,
-  preview: `${CDN_BASE}/${file}`,
+  // 预览图使用 Cloudflare Image Resizing 压缩
+  preview: `${CDN_BASE}/cdn-cgi/image/width=400,quality=80,format=auto/${file}`,
+  // 原图保持不变
   original: `${CDN_BASE}/${file}`,
   width: 1080,
   height: 1920

@@ -5,8 +5,9 @@
 ## 功能特性
 
 - 📱 响应式设计，完美适配手机和电脑
-- 🖼️ 壁纸瀑布流展示
-- 🔍 点击预览大图
+- 🖼️ 壁纸瀑布流展示（无限滚动加载）
+- � Cloudflare 图片自动压缩与优化
+- �🔍 点击预览大图
 - 🔐 密码保护下载
 
 ## 快速开始
@@ -21,13 +22,15 @@ npx serve .
 python3 -m http.server 8000
 ```
 
-然后访问 http://localhost:8000 或 http://localhost:3000
+然后访问 http://localhost:3000 或 http://localhost:3000
 
 ### 添加壁纸
 
+**无需修改代码，只需简单 4 步：**
+
 1. 将图片上传到 Cloudflare R2 存储桶
 2. 在 `images.txt` 末尾添加新图片的文件名
-3. 运行脚本生成配置：
+3. 运行脚本自动生成配置（包含 CDN 优化参数）：
 
 ```bash
 node generate-config.js
