@@ -207,6 +207,14 @@ function openPreview(wallpaper) {
   elements.previewImage.src = wallpaper.preview;
   elements.previewName.textContent = wallpaper.name;
   elements.previewSize.textContent = `${wallpaper.width} × ${wallpaper.height}`;
+
+  // 动态设置按钮文案
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+  if (isMobile) {
+    elements.downloadBtn.innerHTML = '<span class="btn-icon">📱</span> 查看原图（长按保存）';
+  } else {
+    elements.downloadBtn.innerHTML = '<span class="btn-icon">⬇</span> 查看高清原图';
+  }
   
   elements.previewModal.classList.add('active');
   document.body.style.overflow = 'hidden';
