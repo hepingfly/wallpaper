@@ -125,7 +125,10 @@ git commit -m "$COMMIT_MSG"
 echo -e "${GREEN}✓ Commit: $COMMIT_MSG${NC}"
 
 echo -e "${YELLOW}🚀 推送到远程仓库...${NC}"
-git push
+if ! git push 2>/dev/null; then
+    echo -e "${YELLOW}⚠️  首次推送，设置上游分支...${NC}"
+    git push --set-upstream origin main
+fi
 echo -e "${GREEN}✓ Push 成功${NC}"
 
 # 9. 清空 new-images 文件夹
