@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>壁纸画廊 | 春节壁纸精选</title>
+    <meta name="description" content="浏览和下载173张精选高清春节壁纸" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="gallery-page" oncontextmenu="return false" onselectstart="return false">
+
+    <!-- ========== 画廊头部 ========== -->
+    <header class="gallery-header">
+      <div class="container">
+        <a href="index.html" class="back-link">
+          <span class="back-arrow">←</span>
+          <span>返回首页</span>
+        </a>
+        <h1 class="gallery-title">春节壁纸精选</h1>
+        <div class="unlock-status" id="unlockStatus">
+          <span class="lock-icon">🔒</span>
+          <span class="status-text">未解锁</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========== 壁纸网格 ========== -->
+    <main class="gallery-main">
+      <div class="container">
+        <div class="gallery-info">
+          <p>共 <strong id="totalCount">173</strong> 张高清壁纸 · 点击预览</p>
+        </div>
+
+        <div class="gallery-grid" id="wallpaperGrid">
+          <!-- 壁纸卡片由JS动态渲染 -->
+        </div>
+
+        <!-- 加载状态 -->
+        <div class="loading" id="loading">
+          <div class="loading-spinner"></div>
+          <p>加载中...</p>
+        </div>
+
+        <!-- 加载更多指示器 -->
+        <div class="load-more-indicator" id="loadMoreIndicator">
+          <div class="loading-spinner small"></div>
+          <span>加载更多...</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- ========== 简洁页脚 ========== -->
+    <footer class="gallery-footer">
+      <div class="container">
+        <p>© 2026 春节壁纸精选 · <a href="index.html">返回首页</a></p>
+      </div>
+    </footer>
+
+    <!-- ========== 预览弹窗 ========== -->
+    <div class="modal" id="previewModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content preview-content">
+        <button class="modal-close" id="closePreview">×</button>
+        <img class="preview-image" id="previewImage" src="" alt="" />
+        <div class="preview-info">
+          <h3 id="previewName"></h3>
+          <p id="previewSize"></p>
+          <button class="btn btn-primary" id="downloadBtn">
+            <span class="btn-icon">⬇</span> 下载高清原图
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 密码验证弹窗 ========== -->
+    <div class="modal" id="passwordModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content password-content">
+        <button class="modal-close" id="closePassword">×</button>
+        <div class="password-box">
+          <h3>🔐 输入下载密码</h3>
+          <p class="password-hint">购买后请在小红书私信中获取密码</p>
+          <input
+            type="password"
+            class="password-input"
+            id="passwordInput"
+            placeholder="请输入密码"
+          />
+          <p class="password-error" id="passwordError"></p>
+          <button class="btn btn-primary btn-full" id="verifyBtn">
+            验证并下载
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/gallery.js"></script>
+  </body>
+</html>

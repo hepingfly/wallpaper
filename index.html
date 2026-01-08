@@ -9,74 +9,135 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
   </head>
   <body oncontextmenu="return false" onselectstart="return false">
-    <!-- 头部 -->
-    <header class="header">
+
+    <!-- ========== Hero Section ========== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-particles" id="heroParticles"></div>
+      <div class="hero-content">
+        <div class="hero-phone hero-phone-left">
+          <div class="phone-frame">
+            <img src="" alt="壁纸预览" class="phone-screen" data-index="0" />
+          </div>
+        </div>
+
+        <div class="hero-text">
+          <h1 class="hero-title">新春祝福</h1>
+          <p class="hero-subtitle-cn">尽在方寸</p>
+          <p class="hero-desc"><span id="wallpaperCount">173</span>张精选高清壁纸 · 一次付费终身下载</p>
+          <a href="#gallery" class="btn btn-hero">
+            <span class="btn-icon">✨</span>
+            立即获取 ¥9.9
+          </a>
+        </div>
+
+        <div class="hero-phone hero-phone-right">
+          <div class="phone-frame">
+            <img src="" alt="壁纸预览" class="phone-screen" data-index="1" />
+          </div>
+        </div>
+      </div>
+      <div class="hero-scroll-hint">
+        <span>向下滚动</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- ========== Gallery Preview Section ========== -->
+    <section class="gallery-preview-section" id="gallery">
       <div class="container">
-        <h1 class="logo">🧧 春节壁纸精选</h1>
-        <p class="tagline">精选高质量壁纸 · 一次付费终身下载</p>
-      </div>
-    </header>
+        <h2 class="section-title">精选预览</h2>
+        <p class="section-subtitle">173张高清春节壁纸，点击下方按钮查看全部</p>
 
-    <!-- 主内容 -->
-    <main class="main">
+        <!-- 精选 8 张预览 -->
+        <div class="preview-grid" id="previewGrid">
+          <!-- 由 JS 动态填充 8 张精选壁纸 -->
+        </div>
+
+        <!-- CTA 按钮跳转壁纸画廊 -->
+        <div class="gallery-cta">
+          <a href="gallery.html" class="btn btn-hero btn-large">
+            <span class="btn-icon">🖼️</span>
+            查看全部 173 张壁纸
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Pricing Section ========== -->
+    <section class="pricing-section" id="pricing">
       <div class="container">
-        <!-- 壁纸网格 -->
-        <div class="wallpaper-grid" id="wallpaperGrid">
-          <!-- 壁纸卡片由JS动态渲染 -->
-        </div>
-
-        <!-- 加载状态 -->
-        <div class="loading" id="loading">
-          <div class="loading-spinner"></div>
-          <p>加载中...</p>
-        </div>
-      </div>
-    </main>
-
-    <!-- 预览弹窗 -->
-    <div class="modal" id="previewModal">
-      <div class="modal-overlay"></div>
-      <div class="modal-content preview-content">
-        <button class="modal-close" id="closePreview">×</button>
-        <img class="preview-image" id="previewImage" src="" alt="" />
-        <div class="preview-info">
-          <h3 id="previewName"></h3>
-          <p id="previewSize"></p>
-          <button class="btn btn-primary" id="downloadBtn">
-            <span class="btn-icon">⬇</span> 下载高清原图
-          </button>
+        <div class="pricing-card">
+          <div class="pricing-badge">新春特惠</div>
+          <div class="pricing-header">
+            <span class="price-original">¥29.9</span>
+            <span class="price-current">¥9.9</span>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="check-icon">✓</span> 173张高清春节壁纸</li>
+            <li><span class="check-icon">✓</span> 1080×1920 无水印原图</li>
+            <li><span class="check-icon">✓</span> 一次付费终身下载</li>
+            <li><span class="check-icon">✓</span> 后续更新免费获取</li>
+          </ul>
+          <a href="gallery.html" class="btn btn-primary btn-pricing">
+            <span class="btn-icon">🧧</span>
+            立即获取
+          </a>
+          <p class="pricing-hint">小红书购买后私信获取下载密码</p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- 密码验证弹窗 -->
-    <div class="modal" id="passwordModal">
-      <div class="modal-overlay"></div>
-      <div class="modal-content password-content">
-        <button class="modal-close" id="closePassword">×</button>
-        <div class="password-box">
-          <h3>🔐 输入下载密码</h3>
-          <p class="password-hint">购买后请在小红书私信中获取密码</p>
-          <input
-            type="password"
-            class="password-input"
-            id="passwordInput"
-            placeholder="请输入密码"
-          />
-          <p class="password-error" id="passwordError"></p>
-          <button class="btn btn-primary btn-full" id="verifyBtn">
-            验证并下载
-          </button>
+    <!-- ========== FAQ Section ========== -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <h2 class="section-title">常见问题</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>如何购买和获取下载密码？</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>在小红书搜索并购买「春节壁纸精选」，购买成功后私信我们，即可获取下载密码。密码输入后可永久下载所有壁纸。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>壁纸适用于哪些设备？</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>所有壁纸均为 1080×1920 像素，完美适配 iPhone、Android 等主流手机。竖屏设计，锁屏和桌面都可使用。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>购买后还会更新吗？</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>是的！我们会持续更新春节主题壁纸，一次购买即可永久获取所有更新内容，无需额外付费。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>支持退款吗？</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>由于数字商品的特殊性，一旦获取下载密码后不支持退款。购买前可以在本页面预览所有壁纸效果。</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- 底部 -->
+    <!-- ========== Footer ========== -->
     <footer class="footer">
       <div class="container">
         <p>© 2026 春节壁纸精选 · 小红书购买后私信获取密码</p>
