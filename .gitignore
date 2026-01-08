@@ -23,3 +23,6 @@ Temporary Items
 .apdisk
 images/
 new-images/
+
+# VSCode
+.vscode/
